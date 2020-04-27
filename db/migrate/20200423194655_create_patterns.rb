@@ -3,7 +3,7 @@ class CreatePatterns < ActiveRecord::Migration[6.0]
     create_table :patterns do |t|
       t.belongs_to :user, null: false, foreign_key: true
       t.string :name
-      t.string :image
+      t.text :image
 
       t.timestamps
     end

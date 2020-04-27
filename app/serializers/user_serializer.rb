@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :avatar, :favorite_patterns
+  attributes :id, :username, :avatar
 
   has_many :patterns, serializer: PatternSerializer
 
