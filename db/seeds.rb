@@ -5,23 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Color.destroy_all
-Palette.destroy_all
-
-Color.create(hex: "#e1ffe4")
-Color.create(hex: "#1e0f46")
-Color.create(hex: "#eaadbd")
-Color.create(hex: "#ffa751")
-Color.create(hex: "#000071")
-Color.create(hex: "#c289f2")
-Color.create(hex: "#c0b7ff")
-Color.create(hex: "#00008e")
-
-seedPalette = Palette.create(pattern_id: 1)
-
-seedPalette.colors.create(hex: "#e1ffe4")
-seedPalette.colors.create(hex: "#1e0f46")
-seedPalette.colors.create(hex: "#eaadbd")
-seedPalette.colors.create(hex: "#ffa751")
-seedPalette.colors.create(hex: "#000071")
-seedPalette.colors.create(hex: "#c289f2")
+# Color.destroy_all
+# Palette.destroy_all
