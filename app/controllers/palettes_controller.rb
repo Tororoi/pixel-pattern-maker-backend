@@ -9,6 +9,7 @@ class PalettesController < ApplicationController
 
     def create
         @palette = current_user.palettes.create(palette_params)
+        
 
         if @palette.valid?
             render json: { palette: PaletteSerializer.new(@palette) }, status: :created

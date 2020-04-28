@@ -4,4 +4,14 @@ class Pattern < ApplicationRecord
   has_many :palettes
 
   has_many :favorites
+
+  def self.parse (user, pattern, palette)
+    # params = palette: {colors: ["hex", "hex"]}
+    newPattern = user.patterns.create(pattern)
+    newPalette = newPattern.palettes.create()
+    newColors = palette[:colors].each { |color|
+      newPalette.colors.create(hex: color) #implement find or create so you don't make colors that already exist.
+    }
+    return newPattern
+  end
 end

@@ -8,7 +8,7 @@ class PatternsController < ApplicationController
     end
 
     def create
-        @pattern = current_user.patterns.create(pattern_params)
+        @pattern = Pattern.parse(current_user, pattern_params, palette_params)
 
         if @pattern.valid?
             render json: { pattern: PatternSerializer.new(@pattern) }, status: :created
@@ -31,5 +31,9 @@ class PatternsController < ApplicationController
 
     def pattern_params
         params.require(:pattern).permit(:name, :image)
+    end
+
+    def palette_params
+        params.permit(colors: [])
     end
 end
