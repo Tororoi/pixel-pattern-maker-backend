@@ -5,7 +5,7 @@ class Pattern < ApplicationRecord
 
   has_many :favorites
 
-  def self.parse (user, pattern, palette)
+  def self.make (user, pattern, palette)
     # params = palette: {colors: ["hex", "hex"]}
     newPattern = user.patterns.create(pattern)
     newPalette = newPattern.palettes.create()

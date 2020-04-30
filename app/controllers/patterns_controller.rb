@@ -8,7 +8,7 @@ class PatternsController < ApplicationController
     end
 
     def create
-        @pattern = Pattern.parse(current_user, pattern_params, palette_params)
+        @pattern = Pattern.make(current_user, pattern_params, palette_params)
 
         if @pattern.valid?
             render json: { pattern: PatternSerializer.new(@pattern) }, status: :created
@@ -19,7 +19,11 @@ class PatternsController < ApplicationController
 
     def update
         @pattern = Pattern.find(params[:id])
+        # @pattern.edit(pattern_params, paletteID_params[:paletteID], palette_params)
         @pattern.update(pattern_params)
+        @palette = Palette.find(paletteID_params[:paletteID])
+        @palette.palette_colors.destroy_all
+        palette_params[:colors].each {|color| @palette.colors.create(hex: color)}
         render json: { pattern: PatternSerializer.new(@pattern) }
     end
 
@@ -38,5 +42,9 @@ class PatternsController < ApplicationController
 
     def palette_params
         params.permit(colors: [])
+    end
+
+    def paletteID_params
+        params.permit(:paletteID)
     end
 end
