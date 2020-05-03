@@ -1,5 +1,5 @@
 class PatternSerializer < ActiveModel::Serializer
-  attributes :id, :name, :image, :user_id, :creator, :num_faves 
+  attributes :id, :name, :image, :size, :user_id, :creator, :num_faves 
 
   def creator
     self.object.user.username

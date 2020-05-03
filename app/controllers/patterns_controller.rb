@@ -37,7 +37,7 @@ class PatternsController < ApplicationController
     private
 
     def pattern_params
-        params.require(:pattern).permit(:name, :image)
+        params.require(:pattern).permit(:name, :image, :size)
     end
 
     def palette_params
