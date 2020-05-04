@@ -1,6 +1,5 @@
 class PatternsController < ApplicationController
-    skip_before_action :authorized
-    # , only: [:index]
+    skip_before_action :authorized, only: [:index]
 
     def index 
         @patterns = Pattern.all
@@ -24,6 +23,7 @@ class PatternsController < ApplicationController
         @palette = Palette.find(paletteID_params[:paletteID])
         @palette.palette_colors.destroy_all
         palette_params[:colors].each {|color| @palette.colors.create(hex: color)}
+
         render json: { pattern: PatternSerializer.new(@pattern) }
     end
 

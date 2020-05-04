@@ -1,6 +1,5 @@
 class PalettesController < ApplicationController
-    skip_before_action :authorized
-    # , only: [:index]
+    skip_before_action :authorized, only: [:index]
 
     def index 
         @palettes = Palette.all
