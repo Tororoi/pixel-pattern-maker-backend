@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
   get '/persist', to: 'auth#persist'
+  post '/favorite', to: 'users#fave_pattern'
+  delete '/favorite', to: 'users#unfave_pattern'
 end

@@ -20,9 +20,26 @@ class UsersController < ApplicationController
         end
     end
 
+    def fave_pattern
+        @fave = current_user.favorites.create(pattern_id: fave_params[:pattern_id])
+        render json: { favorite: FavoriteSerializer.new(@fave)}, status: 200
+    end
+
+    def unfave_pattern
+        Favorite.destroy(unfave_params[:favorite_id])
+    end
+
     private
 
     def user_params
         params.permit(:username, :password, :avatar)
+    end
+
+    def fave_params
+        params.permit(:pattern_id)
+    end
+
+    def unfave_params
+        params.permit(:favorite_id)
     end
 end

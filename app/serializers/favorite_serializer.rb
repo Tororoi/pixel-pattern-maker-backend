@@ -1,5 +1,5 @@
 class FavoriteSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :pattern_id
+  attributes :id, :pattern
 
   has_one :pattern, serializer: PatternSerializer
 end
