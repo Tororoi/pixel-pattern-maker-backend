@@ -29,6 +29,7 @@ class PatternsController < ApplicationController
 
     def destroy
         @pattern = Pattern.find(params[:id])
+        @pattern.favorites.destroy_all
         @pattern.palettes.each {|p| p.palette_colors.destroy_all}
         @pattern.palettes.destroy_all
         Pattern.destroy(params[:id])
