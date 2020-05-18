@@ -22,7 +22,7 @@ class PatternsController < ApplicationController
         @pattern.update(pattern_params)
         @palette = Palette.find(paletteID_params[:paletteID])
         @palette.palette_colors.destroy_all
-        palette_params[:colors].each {|color| @palette.colors.create(hex: color)}
+        palette_params[:colors].each {|color| @palette.colors.find_or_create_by(hex: color)}
 
         render json: { pattern: PatternSerializer.new(@pattern) }
     end

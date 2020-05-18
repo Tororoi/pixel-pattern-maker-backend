@@ -10,7 +10,7 @@ class Pattern < ApplicationRecord
     newPattern = user.patterns.create(pattern)
     newPalette = newPattern.palettes.create()
     newColors = palette[:colors].each { |color|
-      newPalette.colors.create(hex: color) #implement find or create so you don't make colors that already exist.
+      newPalette.colors.find_or_create_by(hex: color) #implement find or create so you don't make colors that already exist.
     }
     return newPattern
   end
