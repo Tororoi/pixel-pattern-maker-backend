@@ -1,5 +1,5 @@
 class PatternsController < ApplicationController
-    skip_before_action :authorized, only: [:index]
+    skip_before_action :authorized, only: [:index, :destroy]
 
     def index 
         @patterns = Pattern.all
