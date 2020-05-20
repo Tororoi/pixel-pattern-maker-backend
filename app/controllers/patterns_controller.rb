@@ -29,10 +29,14 @@ class PatternsController < ApplicationController
 
     def destroy
         @pattern = Pattern.find(params[:id])
-        @pattern.favorites.destroy_all
-        @pattern.palettes.each {|p| p.palette_colors.destroy_all}
-        @pattern.palettes.destroy_all
-        Pattern.destroy(params[:id])
+        if @pattern.user == current_user 
+            @pattern.favorites.destroy_all
+            @pattern.palettes.each {|p| p.palette_colors.destroy_all}
+            @pattern.palettes.destroy_all
+            Pattern.destroy(params[:id])
+        else
+            render json: { error: 'Unauthorized' }, status: :not_acceptable
+        end
     end
 
     private
