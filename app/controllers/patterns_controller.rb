@@ -18,13 +18,16 @@ class PatternsController < ApplicationController
 
     def update
         @pattern = Pattern.find(params[:id])
-        # @pattern.edit(pattern_params, paletteID_params[:paletteID], palette_params)
-        @pattern.update(pattern_params)
-        @palette = Palette.find(paletteID_params[:paletteID])
-        @palette.palette_colors.destroy_all
-        palette_params[:colors].each {|color| @palette.colors.find_or_create_by(hex: color)}
+        if @pattern.user == current_user 
+            @pattern.update(pattern_params)
+            @palette = Palette.find(paletteID_params[:paletteID])
+            @palette.palette_colors.destroy_all
+            palette_params[:colors].each {|color| @palette.colors.find_or_create_by(hex: color)}
 
-        render json: { pattern: PatternSerializer.new(@pattern) }
+            render json: { pattern: PatternSerializer.new(@pattern) }
+        else
+            render json: { error: 'Unauthorized' }, status: :not_acceptable
+        end
     end
 
     def destroy
