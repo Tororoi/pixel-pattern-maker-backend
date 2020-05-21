@@ -29,6 +29,15 @@ class UsersController < ApplicationController
         Favorite.destroy(unfave_params[:favorite_id])
     end
 
+    def destroy
+        @user = User.find_by(username: user_params[:username])
+        if @user.patterns != [] || @user.favorites != []
+            render json: { error: 'failed to delete user' }, status: :not_acceptable
+        else
+            @user.destroy
+        end
+    end
+
     private
 
     def user_params
