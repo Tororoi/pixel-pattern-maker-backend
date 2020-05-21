@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     end
 
     def destroy
-        @user = User.find_by(username: user_params[:username])
+        @user = User.find(params[:id])
         if @user.patterns != [] || @user.favorites != []
             render json: { error: 'failed to delete user' }, status: :not_acceptable
         else
